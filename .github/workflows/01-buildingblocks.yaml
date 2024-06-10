@@ -1,0 +1,16 @@
+name: 01-buildingblock
+on: push
+jobs: 
+    echo-hello:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say Hello
+              run: echo "Hello, Sudhakar"
+
+    echo-goodbye:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say Bye
+              run: echo "Bye"
+        
+         
