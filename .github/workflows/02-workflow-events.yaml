@@ -1,0 +1,10 @@
+name: 02- Events - Push
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+        - name: show the trigger 
+          run: echo "This got triggered by the following event that is  ${{ github.event_name }}"
+ 
