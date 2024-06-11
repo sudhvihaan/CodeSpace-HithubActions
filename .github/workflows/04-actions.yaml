@@ -1,0 +1,24 @@
+name: 04 - using Actions
+
+on: push
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code to github Actions
+              uses: actions/checkout@v4
+
+
+            - name: Set up Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20.x'
+
+                
+            - name: Install Dependencies
+              run: npm ci
+              working-directory: 04-workflow-actions/react-app
+
+        # 1. Install dependencies of our react application
+        # 2. Execute automated tests
