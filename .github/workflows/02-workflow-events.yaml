@@ -2,7 +2,7 @@ name: 02- Events - Push,pull,cron,dispatch
 run-name: ${{ github.actor }} is testing out GitHub Actions
 on: 
     #push:
-    pull_request:
+    #pull_request:
     #schedule:
         #- cron: '*/5 * * * *'
     workflow_dispatch:
