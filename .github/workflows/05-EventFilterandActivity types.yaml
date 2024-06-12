@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     branches:
-      - main
+      - main # this is triggered only when branching out from main 
 
 jobs:
   echo:
