@@ -9,9 +9,17 @@ on:
         type: boolean
         default: false
 
+env:
+    MY_WORKFLOW_VAR: "workflow"
+    MY_OVERWRITTEN_VAR: "workflow"
+
+
 jobs:
   context-sample:
     runs-on: ubuntu-latest
+    env:
+        MY_JOB_VAR: 'job'
+        MY_OVERWRITTEN_VAR: 'job'
     steps:
       - name: Display Context Values
         run: |
@@ -25,3 +33,7 @@ jobs:
       - name: Retrieve Variables
         run: |
           echo "Variable value: ${{ vars.my_var }}"
+      - name: Retrive Env Varaible
+        run: |
+          echo "Env Variabel is ${{env.MY_WORKFLOW_VAR}}"
+          echo "Evn Variable Overrided is ${{env.MY_OVERWRITTEN_VAR}}"
