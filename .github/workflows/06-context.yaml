@@ -3,7 +3,7 @@ name: 06 -context
 on: push
 
 jobs:
-    echo-data:
+    echo-data-test:
         runs-on: ubuntu-latest
         steps:
             - name: Display 
