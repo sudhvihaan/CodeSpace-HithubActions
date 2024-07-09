@@ -29,5 +29,5 @@ jobs:
         working-directory: 06-Docker/03-Python-Django-Project1/Terraform/deploy_on_ec2/terraform
         run: terraform apply -auto-approve
         env:
-          AWS_ACCESS_KEY_ID: AKIAW3MEDD7C4CWL5TZL
-          AWS_SECRET_ACCESS_KEY: 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
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
