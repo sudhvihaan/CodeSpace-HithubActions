@@ -15,22 +15,18 @@ jobs:
         with:
           node-version: '20.x'
 
-      # Install dependencies
       - name: Install Dependencies
         run: npm ci
         working-directory: 04-workflow-actions/react-app
 
-      # Run unit tests
       - name: Run unit Tests
         run: npm run test
         working-directory: 04-workflow-actions/react-app
 
-      # Build React app
       - name: Build React app
         run: npm run build
         working-directory: 04-workflow-actions/react-app
 
-      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         working-directory: 04-workflow-actions/react-app
