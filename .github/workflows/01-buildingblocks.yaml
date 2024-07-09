@@ -17,7 +17,7 @@ jobs:
           terraform_version: 1.0.11
 
       - name: Terraform Init-1
-        working-directory: ./06-Docker/03-Python-Django-Project1/Terraform/deploy_on_ec2/terraform
+        working-directory: ../06-Docker/03-Python-Django-Project1/Terraform/deploy_on_ec2/terraform
         run: terraform init
 
       - name: Terraform Plan
