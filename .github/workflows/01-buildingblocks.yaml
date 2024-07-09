@@ -26,6 +26,17 @@ jobs:
       run: terraform init
       working-directory: ./TerraformScripts
 
+    - name: Plan Terraform
+      run: terraform plan
+      working-directory: ./TerraformScripts
+
+    - name: Apply Terraform
+      run: terraform apply --auto-approve
+      working-directory: ./TerraformScripts
+
+    - name: Wait for 5 minutes
+      run: sleep 350
+
     - name: Destroy Terraform
       run: terraform destroy --auto-approve
       working-directory: ./TerraformScripts
