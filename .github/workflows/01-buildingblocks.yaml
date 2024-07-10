@@ -44,11 +44,15 @@ jobs:
         terraform output -json > tf_output.json
       working-directory: ./TerraformScripts
 
+    - name: Debug Terraform output
+      run: cat ./TerraformScripts/tf_output.json
+
     - name: Set EC2 public IP as environment variable
       id: set_ec2_ip
       run: |
         EC2_PUBLIC_IP=$(jq -r .web_server_public_ip.value < ./TerraformScripts/tf_output.json)
         echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_ENV
+      shell: /usr/bin/bash -e {0}
 
     - name: Wait for 2 minutes
       run: sleep 120
