@@ -1,11 +1,4 @@
- 
-
-
-
-
-
-
-/*
+ /*
 ****************************************VPC, RDS **********************VPC, RDS *******************VPC, RDS *************** VPC, RDS 
 ****************************************VPC, RDS **********************VPC, RDS *******************VPC, RDS *************** VPC, RDS 
 ****************************************VPC, RDS **********************VPC, RDS *******************VPC, RDS *************** VPC, RDS 
@@ -125,35 +118,25 @@ resource "aws_instance" "wp-os" {
 resource "aws_instance" "web_server" {
   ami                    = "ami-0fe310dde2a8fdc5c"
   instance_type          = "t2.micro"
-  //key_name               = aws_key_pair.my_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_for_publicsubnet.id]
   subnet_id              = aws_subnet.public_subnet.id
-// iam_instance_profile   = "dyjango"
-/*
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo yum update -y
-              sudo yum install git -y
-              git clone https://github.com/sudhvihaan/djangoApp1.git
-              cd djangoApp1/simply
-              sudo yum install python3-pip -y
-              pip install django boto3 psycopg2-binary
-              python3 manage.py makemigrations
-              python3 manage.py migrate
-              python3 manage.py createsuperuser
-              sudo yum install postgresql15 -y
-              EOF
-*/
+
   tags = {
     Name = "web_server"
   }
 }
 
+output "web_server_public_ip" {
+  value = aws_instance.web_server.public_ip
+}
+
+
+/*
 resource "aws_key_pair" "my_key_pair" {
   key_name   = "new-eks-key-pair"
    //public_key = "AAAAB3NzaC1yc2EAAAADAQABAAABAQCZ5xTteYumpx59F4njPWkxBvrziDrP6aOHh2BKpY86HFBglMxIFGfHvm+nTMoTCK3UkNGzVKwD4Ihr8AMJ+zux/fs2+NPqh3mTRxvC25wHh2Q14N34ddtgiEq+Xb7bC63cd/GQv4PLirAr5TBjWtlwQVuLIdnA0H2n0Bx3h85rZ1dszbXjYP/IMKKBsYtdj5i7kEBdsUsT+78RZL/A7MTEZMUh+nzTrjPTAhQbGowjMQTwvWufgdK+l3f6zbK7FDwKhnzfcw3rdiP4f667r1vtA0PNfsQuViicuQebkEg98IqPT5NLIAJj529x1ppD87+z5z56W9DtS4SXIhIIzATb"
    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZ5xTteYumpx59F4njPWkxBvrziDrP6aOHh2BKpY86HFBglMxIFGfHvm+nTMoTCK3UkNGzVKwD4Ihr8AMJ+zux/fs2+NPqh3mTRxvC25wHh2Q14N34ddtgiEq+Xb7bC63cd/GQv4PLirAr5TBjWtlwQVuLIdnA0H2n0Bx3h85rZ1dszbXjYP/IMKKBsYtdj5i7kEBdsUsT+78RZL/A7MTEZMUh+nzTrjPTAhQbGowjMQTwvWufgdK+l3f6zbK7FDwKhnzfcw3rdiP4f667r1vtA0PNfsQuViicuQebkEg98IqPT5NLIAJj529x1ppD87+z5z56W9DtS4SXIhIIzATb imported-openssh-key"
-}
+}*/
 
 
 // *********************************************Private Subnet - database etc - With internte access 
