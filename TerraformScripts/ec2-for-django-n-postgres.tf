@@ -123,7 +123,7 @@ resource "aws_instance" "wp-os" {
 
 
 resource "aws_instance" "web_server" {
-  ami                    = "ami-05d929ac8893c382f"
+  ami                    = "ami-0fe310dde2a8fdc5c"
   instance_type          = "t2.micro"
   //key_name               = aws_key_pair.my_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_for_publicsubnet.id]
@@ -185,9 +185,9 @@ resource "aws_subnet" "private_subnet_01" {
  
 
 resource "aws_instance" "jump_server" {
-  ami           = "ami-05d929ac8893c382f"
+  ami           = "ami-0fe310dde2a8fdc5c"
   instance_type = "t2.micro"
-  key_name      = aws_key_pair.my_key_pair.key_name
+ // key_name      = aws_key_pair.my_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_for_jumpserver.id]
   subnet_id     = aws_subnet.private_subnet_01.id
 
@@ -359,7 +359,7 @@ ns-2037.awsdns-62.co.uk.
 // Note : I have Already create host zone for tgik.uk and the NS details are entered in godaddy.com
 // Fetching Name Server list, this host entry was already made  this server 
 
-
+/*
 data "aws_route53_zone" "tgik_uk" {
   name = "tgik.uk" 
 }
@@ -377,5 +377,5 @@ resource "aws_route53_record" "Enter_A_rec_in_r53" {
   ttl     = "300"
   records = [aws_instance.web_server.public_ip]
 }
-
+*/
 
