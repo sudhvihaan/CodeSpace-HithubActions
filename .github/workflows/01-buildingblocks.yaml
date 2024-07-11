@@ -36,16 +36,17 @@ jobs:
 
  
 
-
     - name: Print working directory
       run: pwd
-
+    
     - name: List contents of current directory
       run: ls -la
-
+    
+    - name: Print contents of TerraformScripts directory
+      run: ls -la ./TerraformScripts
+    
     - name: Wait for 2 minutes
       run: sleep 120
-  
 
 
     - name: Destroy Terraform
