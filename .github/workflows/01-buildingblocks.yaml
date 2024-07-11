@@ -37,19 +37,22 @@ jobs:
         run: terraform apply --auto-approve
         working-directory: ./TerraformScripts
 
-      - name: Get Terraform Output
-        id: terraform_output
-        run: |
-          PUBLIC_IP=$(terraform output -json web_server_public_ip)
-          echo "::set-output name=public_ip::$PUBLIC_IP"
+      
+      - name: Get outputs
+        uses: dflook/terraform-output@v1
+        id: tf-outputs
+        with:
+          path: ./TerraformScripts  # Adjust the path to your Terraform configuration directory
 
       - name: Display Public IP
         run: |
-          echo "Public IP Address: ${{ steps.terraform_output.outputs.public_ip }}"
+          echo "Public IP Address: ${{ steps.tf-outputs.outputs.web_server_public_ip }}"
       
       - name: Wait for 2 minutes
         run: sleep 120
 
-      - name: Destroy Terraform
+      # Add finally block to ensure destroy step is always executed
+      - name: Clean up Terraform
+        if: always()  # Ensure this step runs regardless of previous steps
         run: terraform destroy --auto-approve
         working-directory: ./TerraformScripts
