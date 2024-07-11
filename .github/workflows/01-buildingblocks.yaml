@@ -44,6 +44,10 @@ jobs:
     
     - name: Print contents of TerraformScripts directory
       run: ls -la ./TerraformScripts
+
+
+    - name: List contents of .terraform directory
+      run: ls -la ./TerraformScripts/.terraform      
     
     - name: Wait for 2 minutes
       run: sleep 120
