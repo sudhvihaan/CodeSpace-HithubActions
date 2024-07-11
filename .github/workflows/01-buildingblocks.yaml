@@ -48,7 +48,7 @@ jobs:
       run: cat ./TerraformScripts/tf_output.json
       working-directory: ./TerraformScripts
 
-    - name: Set EC2 public IP as environment variable
+    - name: Set EC2 public IP as environment variablee
       id: set_ec2_ip
       run: |
         EC2_PUBLIC_IP=$(jq -r '.web_server_public_ip.value' < ./TerraformScripts/tf_output.json)
