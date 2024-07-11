@@ -47,9 +47,20 @@ jobs:
       - name: Display Public IP
         run: |
           echo "Public IP Address: ${{ steps.tf-outputs.outputs.web_server_public_ip }}"
-      
-      - name: Wait for 2 minutes
+        
+      - name: Generate Ansible Inventory
+        run: |
+          echo "[my_ec2_instance]" > CodeSpace-HithubActions/Ansible/ansible_inventory.ini
+          echo "my_ec2_instance ansible_host=${{ steps.tf-outputs.outputs.web_server_public_ip }} ansible_user=ec2-user ansible_ssh_private_key_file=Acess_to_ec2.pem" >> CodeSpace-HithubActions/Ansible/ansible_inventory.ini
+          
+      - name: Display Ansible Inventory Content
+        run: cat CodeSpace-HithubActions/Ansible/ansible_inventory.ini
+
+
+      - name: Wait for 1 minutes
         run: sleep 120
+  
+
 
       # Add finally block to ensure destroy step is always executed
       - name: Clean up Terraform
