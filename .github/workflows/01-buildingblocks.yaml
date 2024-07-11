@@ -15,14 +15,14 @@ jobs:
       with:
         terraform_version: 1.0.11
 
-    - name: Configure AWS credentialss
+    - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
 
-    - name: Initialize Terraformm
+    - name: Initialize Terraform
       run: terraform init
       working-directory: ./TerraformScripts
 
@@ -34,20 +34,16 @@ jobs:
       run: terraform apply --auto-approve
       working-directory: ./TerraformScripts
 
+    - name: Get and set EC2 public IP as environment variable
+      id: get_ec2_ip
+      run: |
+        EC2_PUBLIC_IP=$(terraform output -json | jq -r '.web_server_public_ip.value')
+        echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_ENV
+      working-directory: ./TerraformScripts
+
+    - name: Print EC2 public IP
+      run: echo "EC2_PUBLIC_IP is ${{ env.EC2_PUBLIC_IP }}"
  
-
-    - name: Print working directory
-      run: pwd
-    
-    - name: List contents of current directory
-      run: ls -la
-    
-    - name: Print contents of TerraformScripts directory
-      run: ls -la ./TerraformScripts
-
-
-    - name: List contents of .terraform directory
-      run: ls -la ./TerraformScripts/.terraform      
     
     - name: Wait for 2 minutes
       run: sleep 120
