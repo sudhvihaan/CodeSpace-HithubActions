@@ -47,10 +47,13 @@ jobs:
         run: |
           echo "Public IP Address: ${{ steps.tf-outputs.outputs.web_server_public_ip }}"
         
- 
+      - name: Run Ansible playbook
+        run: |
+          ansible-playbook -i "${{ steps.terraform_output.outputs.public_ip }}," -u ec2-user --private-key=./Ansible/access_key.pem ./Ansible/installDjangoapp.yaml
+   
 
       - name: Wait for 2 minutes
-        run: sleep 120
+        run: sleep 300
 
       # Add finally block to ensure destroy step is always executed
       - name: Clean up Terraform
