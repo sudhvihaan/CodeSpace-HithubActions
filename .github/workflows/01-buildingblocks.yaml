@@ -37,11 +37,17 @@ jobs:
         run: terraform apply --auto-approve
         working-directory: ./TerraformScripts
 
-      - name: Get Terraform Output
-        id: terraform_output
-        run: |
-          echo "::set-output name=public_ip::$(terraform output -json web_server_public_ip)"
+      - name: Get outputs
+        uses: dflook/terraform-output@v1
+        id: tf-outputs
+        with:
+          path: ./TerraformScripts  # Adjust the path to your Terraform configuration directory
 
+      - name: Display Public IP
+        run: |
+          echo "Public IP Address: ${{ steps.tf-outputs.outputs.web_server_public_ip }}"
+        
+ 
 
       - name: Wait for 2 minutes
         run: sleep 120
