@@ -13,18 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
- 
- 
+
       - name: Generate Ansible Inventory
         run: |
           echo "[my_ec2_instances]" > ./Ansible/ansible_inventory.ini
-          echo "100.200.230.245 ansible_user=ec2-user ansible_ssh_private_key_file=./Ansible/access_key.pem" >> ./Ansible/ansible_inventory.ini
-    
+          echo "10.10.10.10 ansible_user=ec2-user ansible_ssh_private_key_file=./Ansible/access_key.pem" >> ./Ansible/ansible_inventory.ini
+
       - name: Display Ansible Inventory
         run: |
           echo "Contents of Ansible Inventory:"
-          cat ./Ansible/ansible_inventory.ini    
-  
-      - name: Wait for 2 minutes
-        run: sleep 300
- 
+          cat ./Ansible/ansible_inventory.ini
