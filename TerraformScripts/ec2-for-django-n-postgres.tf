@@ -56,6 +56,9 @@ resource "aws_route_table_association" "name" {
     route_table_id = aws_route_table.rout_table_public.id  
 }
 
+resource "aws_key_pair" "acesskey" {
+  
+}
 
 // Security Group for public subnet 
 resource "aws_security_group" "sg_for_publicsubnet" {
@@ -120,6 +123,7 @@ resource "aws_instance" "web_server" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg_for_publicsubnet.id]
   subnet_id              = aws_subnet.public_subnet.id
+  key_name = "access_to_ec2"
 
   tags = {
     Name = "web_server"
