@@ -57,6 +57,11 @@ jobs:
           echo "Contents of Ansible Inventory:"
           cat ./Ansible/ansible_inventory.ini    
 
+
+      - name: Set permissions for access_key.pem
+        run: |
+          chmod 400 ./Ansible/access_key.pem          
+
       - name: Run Ansible playbook
         run: |
           ansible-playbook -i ./Ansible/ansible_inventory.ini ./Ansible/installDjangoapp.yaml
