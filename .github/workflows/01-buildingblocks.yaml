@@ -56,6 +56,11 @@ jobs:
         run: |
           echo "Contents of Ansible Inventory:"
           cat ./Ansible/ansible_inventory.ini    
+
+      - name: Run Ansible playbook
+        run: |
+          ansible-playbook -i ./Ansible/ansible_inventory.ini ./Ansible/installDjangoapp.yaml
+  
   
       - name: Wait for 2 minutes
         run: sleep 300
